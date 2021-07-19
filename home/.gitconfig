@@ -1,0 +1,27 @@
+[alias]
+	st = status
+	co = checkout
+[user]
+	name = John Whitlock
+	email = jwhitlock@mozilla.com
+	signingkey = 082C735D154FB750
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/john/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = simple
+[gpg]
+	program = gpg
+[pull]
+	ff = only
+[commit]
+    gpgsign = true
+    noverify = true
+[init]
+	defaultBranch = main
