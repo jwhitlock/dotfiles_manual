@@ -1,16 +1,19 @@
 set shell=sh
+"This was needed for python/black plugin, but 'brew install black' worked
 "set pythonthreehome="/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8"
 "set pythonthreedll="/usr/local/opt/python@3.8/Frameworks/Python.framework/Versions/3.8/lib/libpython3.8.dylib"
-set pythonthreehome=/usr/local/opt/python@3.7/Frameworks/Python.framework/Versions/3.7/
-set pythonthreedll=/usr/local/opt/python@3.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7m.dylib
+"set pythonthreehome=/usr/local/opt/python@3.7/Frameworks/Python.framework/Versions/3.7/
+"set pythonthreedll=/usr/local/opt/python@3.7/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7m.dylib
+"set pythonthreehome=/usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/
+"set pythonthreedll=/usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/lib/libpython3.9.dylib
 
 "Vundle
 set nocompatible                    "Don't try to be compatible with vi
 filetype off                        "Needed for vundle
-set rtp+=~/.vim/bundle/Vundle.vim/  "Add vundle to path
+set rtp+=~/.vim/bundle/Vundle.vim   "Add vundle to path
 call vundle#begin()
     "vundle itself
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
     "Project-wide searching
 Bundle 'mileszs/ack.vim'
     "Folder navigator
@@ -35,14 +38,16 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'fatih/vim-go'
     "sh/bash linting"
 Plugin 'itspriddle/vim-shellcheck'
+    "Open in Marked 2
+Plugin 'itspriddle/vim-marked'
     "Javascript support"
 Plugin 'pangloss/vim-javascript'
-     "Black Python formatting"
-if has("python3")
-  Plugin 'python/black'
-endif
-"Rust syntax"
+    "Black Python formatting"
+Plugin 'psf/black'
+    "Rust syntax"
 Plugin 'rust-lang/rust.vim'
+    "UnicodeSearch, others"
+Plugin 'chrisbra/unicode.vim'
 
 call vundle#end()
 filetype plugin indent on       "Loads filetype detection and all installed plugins
@@ -117,7 +122,7 @@ let NERDTreeIgnore=['\.o$', '\~$', '\.pyc']
 "Syntastic
 let g:syntastic_js_jslint_args = ""
 let g:rustfmt_autosave = 1
-let g:syntastic_rst_checkers = ['sphinx']
+"let g:syntastic_rst_checkers = ['sphinx']
 
 "https://medium.com/@hpux/vim-and-eslint-16fa08cc580f
 "set statusline+=%#warningmsg#
@@ -127,8 +132,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+let g:syntastic_python_checkers = ['flake8', 'mypy']
+let g:syntastic_python_flake8_args = "--config=.flake8"
 
 "Macro stuff
 let mapleader="\\"

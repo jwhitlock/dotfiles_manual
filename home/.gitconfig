@@ -1,6 +1,8 @@
 [alias]
 	st = status
 	co = checkout
+	force-push = push --force
+	recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
 [user]
 	name = John Whitlock
 	email = jwhitlock@mozilla.com
@@ -25,3 +27,7 @@
     noverify = true
 [init]
 	defaultBranch = main
+[submodule]
+	recurse = true
+[diff]
+	submodule = log
